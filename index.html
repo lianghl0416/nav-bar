@@ -16,6 +16,7 @@
     </main>
     <footer></footer>
     <script>
+        //1.初始化数据
         var Keys = {
             '0': ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
             '1': ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
@@ -34,10 +35,18 @@
             'l': 'lol.com'
         }
         //取出localStorage中对应的hash
-        var hashInLocalStorage = JSON.parse(localStorage.getItem('bg') || 'null')
+        var hashInLocalStorage = getFromLocalStorage('zzz')
         if (hashInLocalStorage) {
             hash = hashInLocalStorage
         }
+        funtion getFromLocalStorage(name){
+           return JSON.parse(localStorage.getItem(name) || 'null')
+        }
+
+
+
+
+        //2.生成键盘
         //遍历keys，生成kbd标签
         index = 0
         while (index < Keys['length']) { // 0 1 2 
@@ -65,6 +74,7 @@
                 img1.onerror = function (xxx) {
                     xxx.target.src = 'http://www.liaoxuefeng.com/favicon.ico'
                 }
+
                 button.onclick = function (dianji) {
                     button2 = dianji['target']
                     img2 = button2.previousSibling
@@ -74,24 +84,26 @@
                     img2.src = 'http://' + x + '/favicon.ico'
                     img2.onerror = function (xxx) {
                         xxx.target.src = 'http://www.liaoxuefeng.com/favicon.ico'
-                        localStorage.setItem('bg', JSON.stringify(hash))
                     }
-                    kbd.appendChild(img1)
-                    kbd.appendChild(button)
-                    div.appendChild(kbd)
-                    index2 = index2 + 1
+                    localStorage.setItem('bg', JSON.stringify(hash))
                 }
-                index = index + 1
+                kbd.appendChild(img1)
+                kbd.appendChild(button)
+                div.appendChild(kbd)
+                index2 = index2 + 1
             }
+            index = index + 1
+        }
 
-            document.onkeypress = function (jianting) {
-                aj = jianting['key']
-                website = hash[aj]
-                console.log(website)
-                // location.href = 'http://'+website
-                window.open('http://' + website, '-blank')
+        //3.监听键盘
+        document.onkeypress = function (jianting) {
+            aj = jianting['key']
+            website = hash[aj]
+            console.log(website)
+            // location.href = 'http://'+website
+            window.open('http://' + website, '-blank')
 
-            }
+        }
 
     </script>
 </body>
