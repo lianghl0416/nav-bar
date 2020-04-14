@@ -11,9 +11,8 @@
 <body>
     <header></header>
     <main>
-        <div class='wrapper' id='main'>
 
-        </div>
+        <div class='wrapper' id='main'></div>
     </main>
     <footer></footer>
     <script>
@@ -38,33 +37,35 @@
             'z': 'zhifu.com',
         }
         //取出localStorage中对应的hash
-        var hashInLocalStorage = JSON.parse(localStorage.getItem('bg') || 'null' )
-        if(hashInLocalStorage){
+        var hashInLocalStorage = JSON.parse(localStorage.getItem('bg') || 'null')
+        if (hashInLocalStorage) {
             hash = hashInLocalStorage
         }
         //遍历keys，生成kbd标签
         index = 0
         while (index < Keys['length']) { // 0 1 2 
-            div1 = document.createElement('div')
-            main.appendChild(div1)
+            div = document.createElement('div')
+            div.className = 'row'
+            main.appendChild(div)
             row = Keys[index]  // 第一个数组  第二个数组  第三个数组
             index2 = 0
             while (index2 < row['length']) {  //0-9  0-8  0-6
-                kbd1 = document.createElement('kbd')
-                kbd1.textContent = row[index2]
-                buttonX = document.createElement('button')
-                buttonX.textContent = '编辑'
-                buttonX.id = row[index2]
-                buttonX.onclick = function (dianji) {
+                kbd = document.createElement('kbd')
+                kbd.textContent = row[index2]
+                kbd.className = 'key'//  把所有的key的属性改为‘key’的属性
+                button = document.createElement('button')
+                button.textContent = '编辑'
+                button.id = row[index2]
+                button.onclick = function (dianji) {
                     key = dianji['target']['id']
                     X = prompt('给我一个网址')
                     hash[key] = X  //hash变更
-                    localStorage.setItem('bg',JSON.stringify(hash))
+                    localStorage.setItem('bg', JSON.stringify(hash))
                 }
-                kbd1.appendChild(buttonX)
-                div1.appendChild(kbd1)
+                kbd.appendChild(button)
+                div.appendChild(kbd)
                 index2 = index2 + 1
-            } 
+            }
             index = index + 1
         }
 
