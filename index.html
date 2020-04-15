@@ -39,13 +39,9 @@
         if (hashInLocalStorage) {
             hash = hashInLocalStorage
         }
-        funtion getFromLocalStorage(name){
+        function getFromLocalStorage(name){
            return JSON.parse(localStorage.getItem(name) || 'null')
         }
-
-
-
-
         //2.生成键盘
         //遍历keys，生成kbd标签
         index = 0
